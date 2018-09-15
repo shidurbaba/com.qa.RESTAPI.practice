@@ -19,23 +19,23 @@ public class RestClient {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpGet get = new HttpGet(url); // get REQUEST
 		CloseableHttpResponse response = client.execute(get); // hit the GET URL
+		
+	//a.Status Code	
 		int statuscode = response.getStatusLine().getStatusCode();
-
-		System.out.println();
-
+		System.out.println("Status Code Response ---> " + statuscode );
+		
+	//b. GET Json Response String
 		String json = EntityUtils.toString(response.getEntity(), "UTF-8");
-
 		JSONObject jsonResponse = new JSONObject(json);
+		System.out.println("Response JSON from API ---> " + jsonResponse);
 
-	//GET Headers
+	//c. GET All Headers
 		Header[] headers = response.getAllHeaders();
-
 		HashMap<String, String> allHeaders = new HashMap<String, String>();
-
 		for (Header header : headers) {
 			allHeaders.put(header.getName(), header.getValue());
 		}
-
+		System.out.println("Header Array -->" + allHeaders);
 	}
 
 }
